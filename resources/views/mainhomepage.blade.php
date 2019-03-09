@@ -61,9 +61,27 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+        .center{
+            align-items: unset;
+            display: flex;
+            justify-content: center;
+
+        }
     </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#menu").on("click","a", function (event) {
+                event.preventDefault();
+                var id  = $(this).attr('href'),
+                    top = $(id).offset().top;
+                $('body,html').animate({scrollTop: top}, 1500);
+            });
+        });
+    </script>
 </head>
 <body>
+
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
@@ -85,10 +103,22 @@
         </div>
 
         <div class="links">
-            <a href="{{ url('/') }}">Зарегестрироваться как разработчик</a>
-            <a href="{{ url('/') }}">Зарегестрироваться как работодатель</a>
+            <a href="{{ url('/register') }}">Разместить резюме как разработчик</a>
+            <a href="{{ url('/') }}">Найти разработчика</a>
+            <nav id="menu">
+                <ul>
+                    <a href="#yak1">О проекте</a><br>
+                    <a href="#yak2">1655</a> <br>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
+
+<div id="yak1" class="position-ref full-height" style="background-color: aquamarine">
+<div class="center" style="color: brown ;"> О нас</div>
+</div>
+
+<div class="flex-center position-ref full-height" id="yak2">1655</div>
 </body>
 </html>
