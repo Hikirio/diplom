@@ -15,10 +15,25 @@ Route::get('/', function () {
     return view('mainhomepage');
 });
 
-Route::get('/admin', function () {
-    return 'welcome';
-});
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin',
+    'middleware' => ['auth']], function () {
+    Route::get('/', 'DashboardController@dashboard')->name('admin.index');
+}
+);
 
+//Еще не реализован, для поиска работы
+Route::group(['prefix' => 'aspirant', 'namespace' => 'Aspirant',
+    'middleware' => ['auth']], function () {
+    Route::get('/', 'DashboardController@dashboard')->name('aspirant.index');
+}
+);
+
+//Еще не реализован, для работодателя
+Route::group(['prefix' => 'employer', 'namespace' => 'Employer',
+    'middleware' => ['auth']], function () {
+    Route::get('/', 'DashboardController@dashboard')->name('employer.index');
+}
+);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
