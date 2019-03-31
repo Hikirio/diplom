@@ -76,12 +76,15 @@
                 event.preventDefault();
                 var id = $(this).attr('href'),
                     top = $(id).offset().top;
-                $('body,html').animate({scrollTop: top}, 1500);
+                $('body,html').animate({scrollTop: top}, 3000);
             });
         });
     </script>
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel = "stylesheet" />
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"> </script>
 
-{{--кнопка вверх--}}
+
+        {{--кнопка вверх--}}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="//web-ptica.ru/VRV-files/knopkavverh/10.js"></script>
 
@@ -111,15 +114,10 @@
             @auth
                 <a href="{{ url('/home') }}">Home</a>
             @else
-                <small>Работодатель? тебе сюда -></small> <a href="{{ route('login') }}">Вход</a>
+                <a href="{{ route('login') }}">Вход</a>
 
             @endauth
-                @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <small>Разработчик? тебе сюда -></small> <a href="{{ route('login') }}">Вход</a>
 
-            @endauth
         </div>
     @endif
 
@@ -129,8 +127,7 @@
         </div>
 
         <div class="links">
-            <a href="{{ url('/register') }}">Разместить резюме как разработчик</a>
-            <a href="{{ url('/') }}">Найти разработчика</a>
+            <a href="{{ url('/register') }}">Зарегистрироваться для поиска сотрудников/вакансии</a>
             <nav id="menu">
                 <ul>
                     <a href="#yak1">О проекте</a><br>
@@ -161,5 +158,23 @@
 
 
 <div ID = "toTop" > ^ Наверх </div>
+<script type="text/javascript">
+
+    $.ajaxSetup({
+        headers: {
+            // language=JQuery-CSS
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.update').editable({
+        url: '/admin/users',
+        type: 'text',
+        pk: 1,
+        name: 'name',
+        title: 'Enter name'
+
+    });
+</script>
+<!-- Styles -->
 </body>
 </html>
